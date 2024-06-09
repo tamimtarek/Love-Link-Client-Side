@@ -1,7 +1,14 @@
 import { FaHeart } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import img1 from "../../../assets/1.png";
+import useAuth from "../../../hooks/useAuth";
 const Navber = () => {
+  const { logOut, user } = useAuth();
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.error(error));
+  };
   const navLink = (
     <>
       <li>
@@ -16,9 +23,23 @@ const Navber = () => {
       <li>
         <NavLink to="/contact">Contact Us</NavLink>
       </li>
-      <li>
-        <NavLink to="/login">Login</NavLink>
-      </li>
+      {user ? (
+        <li>
+          <button onClick={handleLogOut} className="btn-ghost">
+          LogOut
+        </button>
+        </li>
+        
+      ) : (
+        <li>
+          <NavLink to="/login">Login</NavLink>
+        </li>
+      )},
+      {
+        user && <li>
+        <NavLink to="/deshboard">Deshboard</NavLink>
+        </li>
+      }
     </>
   );
 
