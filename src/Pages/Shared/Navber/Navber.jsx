@@ -1,48 +1,35 @@
 import { FaHeart } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
-
+import img1 from "../../../assets/1.png";
 const Navber = () => {
   const navLink = (
     <>
       <li>
-        <NavLink to="/"
-        >
-          Home
-        </NavLink>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/biodata" >
-          Biodatas
-        </NavLink>
+        <NavLink to="/biodata">Biodatas</NavLink>
       </li>
       <li>
-        <NavLink>
-          About
-        </NavLink>
+        <NavLink>About</NavLink>
       </li>
       <li>
-        <NavLink>
-          Contact Us
-        </NavLink>
+        <NavLink to="/contact">Contact Us</NavLink>
       </li>
       <li>
-        <NavLink>
-          Login
-        </NavLink>
+        <NavLink to="/login">Login</NavLink>
       </li>
-    
     </>
   );
 
   return (
-    <nav className="bg-white mb-6  shadow-xl h-16 border-gray-200 py-2.5 dark:bg-gray-900">
+    <nav className="bg-white mb-6  shadow-xl h-16 border-gray-200 py-2.5">
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
-        <Link to='/' className="flex items-center">
-          <img
-            src="https://www.svgrepo.com/show/499962/music.svg"
-            className="h-6 mr-3 sm:h-9"
-            alt="Landwind Logo"
-          />
+        <Link to="/" className="flex items-center">
+          <img src={img1} className="w-12" alt="Landwind Logo" />
+          <span className="font-bold uppercase text-xl text-red-700">
+            Love Link
+          </span>
         </Link>
         <div className="flex items-center lg:order-2">
           <div className="hidden mt-2 mr-4 sm:inline-block">
@@ -55,7 +42,6 @@ const Navber = () => {
             aria-controls="mobile-menu-2"
             aria-expanded="true"
           >
-            <span className="sr-only">Open main menu</span>
             <svg
               className="w-6 h-6"
               fill="currentColor"
