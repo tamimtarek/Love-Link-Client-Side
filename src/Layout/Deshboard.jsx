@@ -1,25 +1,31 @@
 import React, { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdOutlineDashboard } from "react-icons/md";
-import { RiSettings4Line } from "react-icons/ri";
-import { TbReportAnalytics } from "react-icons/tb";
 import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
-import { FiMessageSquare, FiFolder, FiShoppingCart } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { FiMessageSquare, FiFolder, FiShoppingCart, FiUpload } from "react-icons/fi";
+import { Link, Outlet } from "react-router-dom";
+import { FaCloudUploadAlt, FaSignOutAlt, FaUpload } from "react-icons/fa";
+
+import useAuth from "../hooks/useAuth";
+import toast, { Toaster } from "react-hot-toast";
 //   import { NavLink, Outlet } from "react-router-dom";
 //   import useAdmin from "../hooks/useAdmin";
   
   const Dashboard = () => {
-    
+    const { logOut, user } = useAuth();
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("LogOut")
+      })
+      .catch((error) => toast.error(error));
+  };
     const menus = [
-        { name: "dashboard", link: "/", icon: MdOutlineDashboard },
-        { name: "user", link: "/", icon: AiOutlineUser },
-        { name: "messages", link: "/", icon: FiMessageSquare },
-        { name: "analytics", link: "/", icon: TbReportAnalytics, margin: true },
-        { name: "File Manager", link: "/", icon: FiFolder },
-        { name: "Cart", link: "/", icon: FiShoppingCart },
-        { name: "Saved", link: "/", icon: AiOutlineHeart, margin: true },
-        { name: "Setting", link: "/", icon: RiSettings4Line },
+        { name: "Home", link: "/", icon: MdOutlineDashboard },
+        { name: "Edit Biodata", link: "/deshboard/editbio", icon: FiUpload },
+        { name: "View Biodata", link: "/profile", icon: AiOutlineUser },
+        { name: "My Contact Request", link: "/deshboard/request", icon: FiFolder },
+        { name: "Favourites Biodata", link: "/deshboard/favouritbio", icon: AiOutlineHeart, margin: true },
       ];
       const [open, setOpen] = useState(true);
       return (
@@ -65,11 +71,30 @@ import { Link } from "react-router-dom";
                   </h2>
                 </Link>
               ))}
+              <button className="group flex items-center text-sm  gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md" onClick={handleLogOut}><div><FaSignOutAlt></FaSignOutAlt></div>
+                  <h2
+                    style={{
+                      transitionDelay: `${1 + 3}00ms`,
+                    }}
+                    className={`whitespace-pre duration-500 ${
+                      !open && "opacity-0 translate-x-28 overflow-hidden"
+                    }`}
+                  >
+                    LogOut
+                  </h2>
+                  <h2
+                    className={`${
+                      open && "hidden"
+                    } absolute left-48 bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit  `}
+                  >
+                    LogOut
+                  </h2></button>
             </div>
           </div>
           <div className="m-3 text-xl text-gray-900 font-semibold">
-            REACT TAILWIND
+           <Outlet></Outlet>
           </div>
+          <Toaster></Toaster>
         </section>
       );
   };

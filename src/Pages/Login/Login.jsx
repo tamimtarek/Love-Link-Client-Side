@@ -2,6 +2,7 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const {signIn} = useAuth()
@@ -14,7 +15,8 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-    signIn(email, password).then((res) => {
+    signIn(email, password)
+    .then((res) => {
       const user = res.user;
       console.log(user);
       Swal.fire({
@@ -35,7 +37,10 @@ const Login = () => {
         }
       });
       navigate(from, {replace: true})
-    });
+    })
+    .catch(()=>{
+      toast.error("Something Went to Wrong")
+    })
   };
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
@@ -95,6 +100,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <Toaster></Toaster>
     </div>
   );
 };

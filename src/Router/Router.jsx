@@ -7,6 +7,9 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Ragister/Register";
 import BioDetails from "../Pages/BioDetails/BioDetails";
 import Deshboard from "../Layout/Deshboard";
+import PostBio from "../Pages/Deshboard/PostBio";
+import MyContact from "../Pages/Deshboard/MyContact";
+import PrivetRoute from "./PrivetRoute";
 
 const router = createBrowserRouter([
     {
@@ -40,8 +43,18 @@ const router = createBrowserRouter([
       ]
     },
     {
-      path: "/deshboard",
-      element: <Deshboard></Deshboard>
+      path: "deshboard",
+      element: <PrivetRoute><Deshboard></Deshboard></PrivetRoute>,
+      children:[
+        {
+          path: "editbio",
+          element: <PostBio></PostBio>
+        },
+        {
+          path: "request",
+          element: <MyContact></MyContact>
+        }
+      ]
     }
   ]);
 

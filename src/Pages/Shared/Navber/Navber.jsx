@@ -25,21 +25,14 @@ const Navber = () => {
       </li>
       {user ? (
         <li>
-          <button onClick={handleLogOut} className="btn-ghost">
-          LogOut
-        </button>
+        <NavLink to="/deshboard">Deshboard</NavLink>
         </li>
         
       ) : (
         <li>
           <NavLink to="/login">Login</NavLink>
         </li>
-      )},
-      {
-        user && <li>
-        <NavLink to="/deshboard">Deshboard</NavLink>
-        </li>
-      }
+      )}
     </>
   );
 
