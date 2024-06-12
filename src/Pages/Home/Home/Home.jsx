@@ -4,16 +4,23 @@ import Banner from "../Banner/Banner";
 import Biodata from "../Biodata/Biodata"
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import SuccessStory from "../SuccessStory/SuccessStory";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 
 const Home = () => {
-    const [bios, setBios] = useState([]);
+    
     const [storys, setStory] = useState([]);
-    useEffect(()=>{
-        fetch("bio.json")
-        .then(res => res.json())
-        .then(data => setBios(data))
-    },[])
+    const axiosPublic = useAxiosPublic()
+    
+    const {refetch, data: bios = [] } = useQuery({
+        queryKey: ["bio"],
+        queryFn: async () => {
+          const res = await axiosPublic.get("bio");
+          return res.data;
+        },
+      });
+
     useEffect(()=>{
         fetch("success.json")
         .then(res => res.json())

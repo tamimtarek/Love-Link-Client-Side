@@ -25,7 +25,7 @@ const onSubmit = (data) => {
   .then(res => {
       const user = res.user;
       console.log(user);
-      updateUserProfile(data.name, data.photoURL)
+    updateUserProfile([...user, data.name, data.photoURL])
       .then(()=>{
         const userInfo ={
           name: data.name,

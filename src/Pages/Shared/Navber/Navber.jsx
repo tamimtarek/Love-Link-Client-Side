@@ -25,9 +25,8 @@ const Navber = () => {
       </li>
       {user ? (
         <li>
-        <NavLink to="/deshboard">Deshboard</NavLink>
+          <NavLink to="/deshboard">Deshboard</NavLink>
         </li>
-        
       ) : (
         <li>
           <NavLink to="/login">Login</NavLink>
@@ -91,6 +90,7 @@ const Navber = () => {
           </ul>
         </div>
       </div>
+       
     </nav>
   );
 };

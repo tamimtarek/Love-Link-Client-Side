@@ -29,7 +29,7 @@ import toast, { Toaster } from "react-hot-toast";
       ];
       const [open, setOpen] = useState(true);
       return (
-        <section className="flex gap-6">
+        <section className="flex w-full gap-6">
           <div
             className={`bg-[#0e0e0e] min-h-screen ${
               open ? "w-72" : "w-16"
@@ -91,7 +91,7 @@ import toast, { Toaster } from "react-hot-toast";
                   </h2></button>
             </div>
           </div>
-          <div className="m-3 text-xl text-gray-900 font-semibold">
+          <div className="m-3 w-full text-xl text-gray-900 font-semibold">
            <Outlet></Outlet>
           </div>
           <Toaster></Toaster>
