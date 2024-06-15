@@ -5,13 +5,12 @@ import Swal from "sweetalert2";
 const image_hosting_key = import.meta.env.VITE_imageBB;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const PostBio = () => {
-
-    const axiosPublic = useAxiosPublic();
-  const {register,  handleSubmit, reset } = useForm();
+  const axiosPublic = useAxiosPublic();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (data) => {
     console.log(data);
     // image upload to imagebb and then get an url
-    const imageFile = { image: data.image[0] };
+    const imageFile = { image: data.profile_image[0] };
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -19,37 +18,39 @@ const PostBio = () => {
     });
     console.log(res);
     if (res.data.success) {
-      const menuItem = {
+      const bioDetail = {
+    
         name: data.name,
         father_name: data.father_name,
         mother_name: data.mother_name,
         age: data.age,
-        partner_age: data.partner_age,
-        partner_height: data.partner_height,
-        partner_weight: data.partner_weight,
+        expected_partner_partner_age: data.expected_partner_age,
+        expected_partner_height: data.expected_partner_height,
+        expected_partner_weight: data.expected_partner_weight,
         date_of_birth: data.date_of_birth,
         occupation: data.occupation,
         race: data.race,
         height: data.height,
         weight: data.weight,
-        sex: data.sex,
-        phone: data.phone,
-        email: data.email,
+        gender: data.gender,
+        mobile_number: data.mobile_number,
+        contact_email: data.contact_email,
         permanet_division: data.permanet_division,
         present_division: data.present_division,
         image: res.data.data.display_url,
       };
-      const menuRes = await axiosPublic.post("/bio", menuItem);
-      console.log(menuRes)
-      if(menuRes.data.insertedId){
-          reset();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Biodata Created Successfully",
-            showConfirmButton: false,
-            timer: 1500
-          });
+      
+      const bios = await axiosPublic.post("/bio", bioDetail);
+      console.log(bios);
+      if (bios.data.insertedId) {
+        reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Biodata Created Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     }
   };
@@ -63,7 +64,10 @@ const PostBio = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="">
               <h3 className="mb-2">Sex</h3>
-              <select {...register("sex", {required: true})} className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+              <select
+                {...register("gender", { required: true })}
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              >
                 <option selected disabled value="">
                   Select Sex
                 </option>
@@ -79,7 +83,7 @@ const PostBio = () => {
                 Full Name
               </label>
               <input
-                {...register("name", {required: true})}
+                {...register("name", { required: true })}
                 type="text"
                 name="name"
                 id="name"
@@ -98,9 +102,9 @@ const PostBio = () => {
                 Image
               </label>
               <input
-              {...register("image", {required: true})}
+                {...register("profile_image", { required: true })}
                 type="file"
-                name="image"
+                name="profile_image"
                 id="image"
                 placeholder="image"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -114,7 +118,7 @@ const PostBio = () => {
                 Date of Birth
               </label>
               <input
-              {...register("date_of_birth", {required: true})}
+                {...register("date_of_birth", { required: true })}
                 type="date"
                 name="date_of_birth"
                 id="date"
@@ -126,7 +130,10 @@ const PostBio = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="">
               <h3 className="mb-2">Height</h3>
-          <select {...register("height", {required: true})} className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+              <select
+                {...register("height", { required: true })}
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              >
                 <option selected disabled value="">
                   Select Height
                 </option>
@@ -147,7 +154,10 @@ const PostBio = () => {
             </div>
             <div className="">
               <h3 className="mb-2">Weight</h3>
-              <select {...register("weight", {required: true})} className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+              <select
+                {...register("weight", { required: true })}
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              >
                 <option selected disabled value="">
                   Select Weight
                 </option>
@@ -171,7 +181,10 @@ const PostBio = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="">
               <h3 className="mb-2">Race</h3>
-              <select {...register("race", {required: true})} className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+              <select
+                {...register("race", { required: true })}
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              >
                 <option selected value="" disabled>
                   Select race
                 </option>
@@ -188,7 +201,10 @@ const PostBio = () => {
             </div>
             <div className="mb-5">
               <h3 className="mb-2">Occupation</h3>
-              <select {...register("occupation", {required: true})} className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+              <select
+                {...register("occupation", { required: true })}
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              >
                 <option disabled value="">
                   Select Occupation
                 </option>
@@ -212,9 +228,9 @@ const PostBio = () => {
                 Fathers Name
               </label>
               <input
-              {...register("father_name", {required: true})}
+                {...register("fathers_name", { required: true })}
                 type="text"
-                name="father_name"
+                name="fathers_name"
                 id="fathe_name"
                 placeholder="Fathers Name"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -225,9 +241,9 @@ const PostBio = () => {
                 Mothers Name
               </label>
               <input
-              {...register("mother_name", {required: true})}
+                {...register("mothers_name", { required: true })}
                 type="text"
-                name="mother_name"
+                name="mothers_name"
                 id="mname"
                 placeholder="Mothers Name"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -238,7 +254,10 @@ const PostBio = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="">
               <h3 className="mb-2">Permanent Division Name</h3>
-              <select {...register("permanent_division", {required: true})} className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+              <select
+                {...register("permanent_division", { required: true })}
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              >
                 <option selected disabled value="">
                   Select Permanent Division
                 </option>
@@ -253,7 +272,10 @@ const PostBio = () => {
             </div>
             <div className="">
               <h3 className="mb-2">Present Division Name</h3>
-              <select {...register("prsent_division", {required: true})} className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+              <select
+                {...register("present_division", { required: true })}
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              >
                 <option selected disabled value="">
                   Select Present Division
                 </option>
@@ -274,7 +296,7 @@ const PostBio = () => {
                 Age
               </label>
               <input
-              {...register("age", {required: true})}
+                {...register("age", { required: true })}
                 type="text"
                 name="age"
                 id="age"
@@ -287,9 +309,9 @@ const PostBio = () => {
                 Expected Partner Age
               </label>
               <input
-              {...register("partner_age", {required: true})}
+                {...register("expected_partner_age", { required: true })}
                 type="text"
-                name="partner_age"
+                name="expected_partner_age"
                 id="page"
                 placeholder="Expected Partner Age"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -300,7 +322,10 @@ const PostBio = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="">
               <h3 className="mb-2">Expected Partner Height</h3>
-              <select {...register("partner_height", {required: true})} className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+              <select
+                {...register("expected_partner_height", { required: true })}
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              >
                 <option selected disabled value="">
                   Select Expected Partner Height
                 </option>
@@ -321,7 +346,10 @@ const PostBio = () => {
             </div>
             <div className="">
               <h3 className="mb-2">Expected Partner Weight</h3>
-              <select {...register("patner_weight", {required: true})} className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+              <select
+                {...register("expected_patner_weight", { required: true })}
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              >
                 <option selected disabled value="">
                   Select Expected Partner Weight
                 </option>
@@ -347,9 +375,9 @@ const PostBio = () => {
                 Contact Email
               </label>
               <input
-              {...register("email", {required: true})}
+                {...register("contact_email", { required: true })}
                 type="email"
-                name="email"
+                name="contact_email"
                 id="fname"
                 placeholder="Contact Email"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -360,9 +388,9 @@ const PostBio = () => {
                 Mobile Number
               </label>
               <input
-              {...register("phone", {required: true})}
+                {...register("mobile_number", { required: true })}
                 type="text"
-                name="phone"
+                name="mobile_number"
                 id="phone"
                 placeholder="Mobile Number"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
