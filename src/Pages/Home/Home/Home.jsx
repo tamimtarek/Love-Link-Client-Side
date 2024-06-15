@@ -10,22 +10,25 @@ import { useQuery } from "@tanstack/react-query";
 
 const Home = () => {
     
-    const [storys, setStory] = useState([]);
+    
     const axiosPublic = useAxiosPublic()
     
-    const {refetch, data: bios = [] } = useQuery({
+    const { data: bios = [] } = useQuery({
         queryKey: ["bio"],
         queryFn: async () => {
           const res = await axiosPublic.get("bio");
           return res.data;
         },
       });
+    const { data: storys = [] } = useQuery({
+        queryKey: ["success"],
+        queryFn: async () => {
+          const res = await axiosPublic.get("success");
+          return res.data;
+        },
+      });
 
-    useEffect(()=>{
-        fetch("success.json")
-        .then(res => res.json())
-        .then(data => setStory(data))
-    },[])
+    
     console.log(storys);
     return (
         <div>
