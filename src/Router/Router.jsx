@@ -10,11 +10,20 @@ import Deshboard from "../Layout/Deshboard";
 import PostBio from "../Pages/Deshboard/PostBio";
 import MyContact from "../Pages/Deshboard/MyContact";
 import PrivetRoute from "./PrivetRoute";
+import ManageUser from "../Pages/Deshboard/ManageUser";
+import AdminRoute from "./AdminRoute";
+import ChackOut from "../Pages/BioDetails/ChackOut/ChackOut";
+import Error from "../Pages/Error/Error";
+import Favourits from "../Pages/Deshboard/Favourits";
+import ViewBio from "../Pages/Deshboard/ViewBio";
+import Request from "../Pages/Deshboard/Request";
+import Premium from "../Pages/Deshboard/Premium";
 
 const router = createBrowserRouter([
     {
       path: "/",
       element: <Root></Root>,
+      errorElement: <Error></Error>,
       children: [
         {
             path: "/",
@@ -38,7 +47,11 @@ const router = createBrowserRouter([
         },
         {
           path: "/details/:id",
-          element: <BioDetails></BioDetails>
+          element: <PrivetRoute><BioDetails></BioDetails></PrivetRoute>
+        },
+        {
+          path: "/chackout/:id",
+          element: <PrivetRoute><ChackOut></ChackOut></PrivetRoute>
         }
       ]
     },
@@ -53,6 +66,26 @@ const router = createBrowserRouter([
         {
           path: "request",
           element: <MyContact></MyContact>
+        },
+        {
+          path: "viewbio",
+          element: <ViewBio></ViewBio>
+        },
+        {
+          path: "favourit",
+          element:<Favourits></Favourits>
+        },
+        {
+          path: "manageuser",
+          element: <AdminRoute><ManageUser></ManageUser></AdminRoute>
+        },
+        {
+          path: "contact",
+          element: <AdminRoute><Request></Request></AdminRoute>
+        },
+        {
+          path: "premium",
+          element:<AdminRoute><Premium></Premium></AdminRoute>
         }
       ]
     }

@@ -82,9 +82,6 @@ const MyContact = () => {
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                        {bio.contact_email}
                       </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                       {bio.contact_email}
-                      </td>
                     </tr>
                    
                   </tbody>)

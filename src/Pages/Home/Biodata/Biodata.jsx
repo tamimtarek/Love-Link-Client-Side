@@ -14,7 +14,7 @@ const Biodata = ({ bio }) => {
       <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden">
         <img
           className="object-cover object-center h-32"
-          src={bio.profile_image}
+          src={bio.image}
           alt="Woman looking front"
         />
       </div>

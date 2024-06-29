@@ -28,16 +28,16 @@ import { FaPeopleGroup } from "react-icons/fa6";
         { name: "Home", link: "/", icon: MdOutlineDashboard },
         { name: "User Dashboard", link: "/deshboard", icon: FaHouseUser },
         { name: "Edit Biodata", link: "/deshboard/editbio", icon: FiUpload },
-        { name: "View Biodata", link: "/profile", icon: MdPreview },
+        { name: "View Biodata", link: "/deshboard/viewbio", icon: MdPreview },
         { name: "My Contact Request", link: "/deshboard/request", icon: FiFolder },
-        { name: "Favourites Biodata", link: "/deshboard/favouritbio", icon: AiOutlineHeart, margin: true },
+        { name: "Favourites Biodata", link: "/deshboard/favourit", icon: AiOutlineHeart, margin: true },
       ];
     const adminLink = [
         { name: "Home", link: "/", icon: MdOutlineDashboard },
         { name: "Admin Dashboard", link: "/deshboard", icon: MdAdminPanelSettings },
-        { name: "Manage Users", link: "/deshboard/manageusers", icon: FaUserAlt },
+        { name: "Manage Users", link: "/deshboard/manageuser", icon: FaUserAlt },
         { name: "Approved Premium", link: "/deshboard/premium", icon: FiFolder },
-        { name: "Approved Contact Request", link: "/deshboard/favouritbio", icon: AiOutlineHeart, margin: true },
+        { name: "Approved Contact Request", link: "/deshboard/contact", icon: AiOutlineHeart, margin: true },
       ];
 
       const [open, setOpen] = useState(true);
